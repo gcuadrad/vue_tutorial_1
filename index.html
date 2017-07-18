@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head lang="es">
+    <meta charset="utf-8">
+    <title>Curso Vue</title>
+    <style>
+      .like {
+        background: green;
+        color: white;
+        padding: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Dinamic components -->
+      <button v-on:click="selectedComponent = 'parent'">Parent component</button>
+      <button v-on:click="selectedComponent = 'articles'">Articles component</button>
+      <component :is="selectedComponent"></component>
+      <hr>
+      <parent></parent>
+      <hr>
+      <fruits :object="text" inline-template>
+        <div>
+            {{object}}
+        </div>
+      </fruits>
+      <hr>
+
+      <articles></articles>
+
+      <hr>
+      <h1>{{ text | uppercase}}</h1>
+
+      <h2 v-text="text"></h2>
+      <p>{{ name }}</p>
+      <input type="text" v-model="name">
+      <br>
+      <strong v-if="nota && nota >= 5">Tu nota es mayor a 5!</strong>
+      <hr>
+      Movies:
+      <input type="text" v-model="search">
+      <ul>
+        <li v-on:click="mark(index)" v-bind:class="{like: index === selected}" v-for="(movie, index) in findMovie">{{ movie }} <button type="button" v-on:click="removeMovie(index)">Remove</button></li>
+      </ul>
+      <form v-on:submit.prevent="addMovie">
+        <input type="text" v-model="newMovie">
+        <input type="submit" value="Save movie">
+      </form>
+    </main>
+    <script src="https://unpkg.com/vue@2.4.1"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
